@@ -4,267 +4,64 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Bem-te-vi — Bar & Lanches</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
+
+  /* ── VARIÁVEIS ───────────────────────── */
   :root {
-    --cream: #F6E8A0;
+    --cream:       #F6E8A0;
     --cream-light: #FBF3CC;
-    --cream-dark: #E8D478;
-    --red: #C0362A;
-    --red-dark: #8B2218;
-    --red-light: #E04030;
-    --brown: #2C1810;
-    --brown-mid: #5C3A28;
-    --orange: #D4691E;
-    --text: #2C1810;
-    --text-muted: #7A5540;
-    --radius: 14px;
-    --radius-sm: 8px;
-    --radius-lg: 20px;
+    --cream-dark:  #E8D478;
+    --red:         #C0362A;
+    --red-dark:    #8B2218;
+    --red-light:   #E04030;
+    --brown:       #2C1810;
+    --brown-mid:   #5C3A28;
+    --orange:      #D4691E;
+    --text:        #2C1810;
+    --text-muted:  #7A5540;
+    --radius:      14px;
+    --radius-sm:   8px;
+    --radius-lg:   20px;
   }
 
+  /* ── BASE ────────────────────────────── */
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
-
+  html { overflow-x: hidden; }
   body {
     font-family: 'Poppins', sans-serif;
     background: var(--cream-light);
     color: var(--text);
     overflow-x: hidden;
   }
+  section[id], div[id] { scroll-margin-top: 70px; }
 
-  /* ── NAV ─────────────────────────────── */
-  nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 100;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0.85rem 4rem;
-    background: rgba(246, 232, 160, 0.95);
-    backdrop-filter: blur(10px);
-    border-bottom: 1px solid rgba(192, 54, 42, 0.15);
-    transition: box-shadow .3s;
+  /* ── LAYOUT ──────────────────────────── */
+  .container {
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 0 4rem;
   }
-
-  .nav-brand {
-    display: flex;
-    align-items: center;
-    gap: 0.85rem;
-    text-decoration: none;
-  }
-
-  /* ── LOGO COMPONENT (usado em todo lugar) ── */
-  .logo-block {
-    display: flex;
-    align-items: center;
-    gap: 0.9rem;
-    text-decoration: none;
-  }
-  .logo-circle {
-    flex-shrink: 0;
-    border-radius: 50%;
-    background: var(--red);
-    overflow: hidden;
-    box-shadow: 0 4px 16px rgba(192,54,42,0.4);
-  }
-  .logo-circle img {
+  .section-label {
+    font-size: 0.62rem;
+    font-weight: 500;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--orange);
     display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 50%;
+    margin-bottom: 1rem;
   }
-  .logo-texts {
-    display: flex;
-    flex-direction: column;
-    gap: 0.15rem;
-  }
-  .logo-name {
+  .section-title {
     font-family: 'Playfair Display', serif;
-    font-weight: 900;
-    letter-spacing: -0.02em;
-    line-height: 1;
-  }
-  .logo-name .dash, .logo-name em { font-style: italic; }
-  .logo-sub {
-    font-family: 'Poppins', sans-serif;
+    font-size: clamp(2.4rem, 4.5vw, 4rem);
     font-weight: 700;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-  }
-
-  /* tamanhos */
-  .logo-block[data-size="sm"] .logo-circle { width: 40px; height: 40px; }
-  .logo-block[data-size="sm"] .logo-name   { font-size: 1.25rem; }
-  .logo-block[data-size="sm"] .logo-sub    { font-size: 0.6rem; }
-
-  .logo-block[data-size="md"] .logo-circle { width: 62px; height: 62px; box-shadow: 0 6px 22px rgba(192,54,42,0.45); }
-  .logo-block[data-size="md"] .logo-name   { font-size: 2rem; }
-  .logo-block[data-size="md"] .logo-sub    { font-size: 0.68rem; }
-
-  .logo-block[data-size="lg"] .logo-circle { width: 80px; height: 80px; box-shadow: 0 8px 28px rgba(192,54,42,0.45); }
-  .logo-block[data-size="lg"] .logo-name   { font-size: 3rem; }
-  .logo-block[data-size="lg"] .logo-sub    { font-size: 0.75rem; }
-
-  /* temas */
-  .logo-block[data-theme="dark"] .logo-name,
-  .logo-block[data-theme="dark"] .logo-name .dash,
-  .logo-block[data-theme="dark"] .logo-name em { color: var(--orange); }
-  .logo-block[data-theme="dark"] .logo-sub     { color: var(--red); }
-
-  .logo-block[data-theme="light"] .logo-name   { color: var(--cream); }
-  .logo-block[data-theme="light"] .logo-name .dash,
-  .logo-block[data-theme="light"] .logo-name em { color: var(--red-light); }
-  .logo-block[data-theme="light"] .logo-sub    { color: var(--red-light); }
-
-  .nav-right {
-    display: flex;
-    align-items: center;
-    gap: 3rem;
-  }
-
-  .nav-links {
-    display: flex;
-    gap: 2.5rem;
-    list-style: none;
-  }
-
-  .nav-links a {
-    text-decoration: none;
-    font-size: 0.7rem;
-    font-weight: 500;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--brown-mid);
-    transition: color .2s;
-  }
-  .nav-links a:hover { color: var(--red); }
-
-  .nav-cta {
-    background: var(--red);
-    color: #fff;
-    text-decoration: none;
-    font-size: 0.68rem;
-    font-weight: 500;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    padding: 0.65rem 1.6rem;
-    border-radius: var(--radius-sm);
-    transition: background .2s, transform .2s;
-  }
-  .nav-cta:hover { background: var(--red-dark); transform: translateY(-1px); }
-
-  /* ── HERO ────────────────────────────── */
-  .hero {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    overflow: hidden;
-    background: var(--cream);
-  }
-
-  .hero::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background-image: radial-gradient(circle, rgba(192,54,42,0.16) 1px, transparent 1px);
-    background-size: 24px 24px;
-    pointer-events: none;
-  }
-
-  /* vinheta nas bordas */
-  .hero::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(ellipse at center,
-      transparent 38%,
-      rgba(44, 24, 16, 0.13) 65%,
-      rgba(44, 24, 16, 0.32) 100%
-    );
-    pointer-events: none;
-  }
-
-  .hero-botanical {
-    position: absolute;
-    opacity: 0.15;
-    pointer-events: none;
-  }
-  .hero-botanical.left  { left: -80px; top: -60px; width: 520px; transform: rotate(-12deg); }
-  .hero-botanical.right { right: -100px; bottom: -80px; width: 560px; transform: rotate(18deg) scaleX(-1); }
-
-  .hero-bird-bg {
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    height: 92%;
-    width: auto;
-    object-fit: contain;
-    object-position: bottom right;
-    mix-blend-mode: multiply;
-    opacity: 0.22;
-    pointer-events: none;
-    user-select: none;
-  }
-
-  .hero-content {
-    text-align: center;
-    position: relative;
-    z-index: 2;
-    animation: heroIn 1.2s cubic-bezier(.22,1,.36,1) both;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  @keyframes heroIn {
-    from { opacity: 0; transform: translateY(50px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-
-  .hero-logo-mark {
-    width: 110px;
-    height: 110px;
-    border-radius: 50%;
-    object-fit: cover;
-    background: var(--red);
-    box-shadow: 0 16px 48px rgba(192,54,42,0.45), 0 4px 16px rgba(44,24,16,0.25);
-    margin-bottom: 2rem;
-    display: block;
-  }
-
-  .hero-title {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(5rem, 12vw, 10.5rem);
-    font-weight: 900;
-    line-height: 0.88;
-    letter-spacing: -0.03em;
+    line-height: 1.06;
+    letter-spacing: -0.025em;
     color: var(--brown);
   }
-  .hero-title .dash { color: var(--red); }
-  .hero-title .italic { font-style: italic; color: var(--red); }
+  .section-title em { font-style: italic; color: var(--red); }
 
-  .hero-subtitle {
-    font-family: 'Poppins', sans-serif;
-    font-size: clamp(0.85rem, 1.6vw, 1.1rem);
-    font-weight: 700;
-    letter-spacing: 0.28em;
-    text-transform: uppercase;
-    color: var(--red);
-    margin-top: 1rem;
-    margin-bottom: 3rem;
-  }
-
-  .hero-cta {
-    display: inline-flex;
-    gap: 1.2rem;
-    align-items: center;
-  }
-
+  /* ── BOTÕES ──────────────────────────── */
   .btn-primary {
     background: var(--red);
     color: #fff;
@@ -293,6 +90,163 @@
   }
   .btn-outline:hover { border-color: var(--red); color: var(--red); }
 
+  /* ── NAV ─────────────────────────────── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.85rem 4rem;
+    background: rgba(246, 232, 160, 0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(192, 54, 42, 0.15);
+    transition: box-shadow .3s;
+  }
+  .nav-right { display: flex; align-items: center; gap: 3rem; }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    text-decoration: none;
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--brown-mid);
+    transition: color .2s;
+  }
+  .nav-links a:hover { color: var(--red); }
+
+  /* ── LOGO ────────────────────────────── */
+  .logo-block { display: flex; align-items: center; gap: 0.9rem; text-decoration: none; }
+  .logo-circle {
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: var(--red);
+    overflow: hidden;
+    box-shadow: 0 4px 16px rgba(192,54,42,0.4);
+  }
+  .logo-circle img { display: block; width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
+  .logo-texts { display: flex; flex-direction: column; gap: 0.15rem; }
+  .logo-name {
+    font-family: 'Playfair Display', serif;
+    font-weight: 900;
+    letter-spacing: -0.02em;
+    line-height: 1;
+  }
+  .logo-name .dash, .logo-name em { font-style: italic; }
+  .logo-sub { font-family: 'Poppins', sans-serif; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; }
+
+  .logo-block[data-size="sm"] .logo-circle { width: 40px; height: 40px; }
+  .logo-block[data-size="sm"] .logo-name   { font-size: 1.25rem; }
+  .logo-block[data-size="sm"] .logo-sub    { font-size: 0.6rem; }
+
+  .logo-block[data-size="lg"] .logo-circle { width: 80px; height: 80px; box-shadow: 0 8px 28px rgba(192,54,42,0.45); }
+  .logo-block[data-size="lg"] .logo-name   { font-size: 3rem; }
+  .logo-block[data-size="lg"] .logo-sub    { font-size: 0.75rem; }
+
+  .logo-block[data-theme="dark"] .logo-name,
+  .logo-block[data-theme="dark"] .logo-name .dash,
+  .logo-block[data-theme="dark"] .logo-name em { color: var(--orange); }
+  .logo-block[data-theme="dark"] .logo-sub     { color: var(--red); }
+
+  .logo-block[data-theme="light"] .logo-name   { color: var(--cream); }
+  .logo-block[data-theme="light"] .logo-name .dash,
+  .logo-block[data-theme="light"] .logo-name em { color: var(--red-light); }
+  .logo-block[data-theme="light"] .logo-sub    { color: var(--red-light); }
+
+  /* ── WHATSAPP FLUTUANTE ─────────────── */
+  .whatsapp-float {
+    position: fixed;
+    bottom: 1.8rem;
+    right: 1.8rem;
+    z-index: 200;
+    background: #25D366;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 20px rgba(37,211,102,0.45);
+    text-decoration: none;
+    transition: transform .2s, box-shadow .2s;
+  }
+  .whatsapp-float:hover { transform: scale(1.1); box-shadow: 0 8px 28px rgba(37,211,102,0.55); }
+
+  /* ── HERO ────────────────────────────── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    background: var(--cream);
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(circle, rgba(192,54,42,0.16) 1px, transparent 1px);
+    background-size: 24px 24px;
+    pointer-events: none;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at center, transparent 38%, rgba(44,24,16,0.13) 65%, rgba(44,24,16,0.32) 100%);
+    pointer-events: none;
+  }
+  .hero-botanical { position: absolute; opacity: 0.15; pointer-events: none; }
+  .hero-botanical.left  { left: -80px; top: -60px; width: 520px; transform: rotate(-12deg); }
+  .hero-botanical.right { right: -100px; bottom: -80px; width: 560px; transform: rotate(18deg) scaleX(-1); }
+
+  .hero-content {
+    text-align: center;
+    position: relative;
+    z-index: 2;
+    animation: heroIn 1.2s cubic-bezier(.22,1,.36,1) both;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  @keyframes heroIn {
+    from { opacity: 0; transform: translateY(50px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-logo-mark {
+    width: 110px; height: 110px;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 16px 48px rgba(192,54,42,0.45), 0 4px 16px rgba(44,24,16,0.25);
+    margin-bottom: 2rem;
+    display: block;
+  }
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(5rem, 12vw, 10.5rem);
+    font-weight: 900;
+    line-height: 0.88;
+    letter-spacing: -0.03em;
+    color: var(--brown);
+  }
+  .hero-title .dash   { color: var(--red); }
+  .hero-title .italic { font-style: italic; color: var(--red); }
+
+  .hero-subtitle {
+    font-size: clamp(0.85rem, 1.6vw, 1.1rem);
+    font-weight: 700;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-top: 1rem;
+    margin-bottom: 3rem;
+  }
+  .hero-cta { display: inline-flex; gap: 1.2rem; align-items: center; }
+
   .scroll-hint {
     position: absolute;
     bottom: 2.5rem;
@@ -304,151 +258,21 @@
     gap: 0.5rem;
     animation: bounce 2.4s infinite;
   }
-  .scroll-hint span {
-    font-size: 0.6rem;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: var(--text-muted);
-  }
+  .scroll-hint span { font-size: 0.6rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--text-muted); }
   @keyframes bounce {
     0%,100% { transform: translateX(-50%) translateY(0); }
     50%      { transform: translateX(-50%) translateY(8px); }
   }
 
-  /* ── LAYOUT ──────────────────────────── */
-  .container {
-    max-width: 1240px;
-    margin: 0 auto;
-    padding: 0 4rem;
-  }
-
-  .section-label {
-    font-size: 0.62rem;
-    font-weight: 500;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    color: var(--orange);
-    display: block;
-    margin-bottom: 1rem;
-  }
-
-  .section-title {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(2.4rem, 4.5vw, 4rem);
-    font-weight: 700;
-    line-height: 1.06;
-    letter-spacing: -0.025em;
-    color: var(--brown);
-  }
-  .section-title em { font-style: italic; color: var(--red); }
-
-  /* ── SOBRE ──────────────────────────── */
-  .sobre-banda-wrap {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .sobre-section {
-    background: var(--brown);
-    padding: 3rem 0;
-    overflow: hidden;
-    flex: 1;
-    display: flex;
-    align-items: center;
-  }
-  .sobre-section .container {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4rem;
-    align-items: center;
-  }
-
-  .sobre-section .section-label { color: var(--cream-dark); opacity: 0.65; }
-  .sobre-section .section-title { color: var(--cream-light); }
-  .sobre-section .section-title em { color: var(--red-light); }
-
-  .sobre-text {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.35rem;
-    font-weight: 300;
-    line-height: 1.78;
-    color: rgba(246,232,160,0.78);
-    margin-top: 1.6rem;
-  }
-
-  .sobre-divider {
-    width: 48px;
-    height: 2px;
-    background: var(--red);
-    margin: 2rem 0;
-    border-radius: 2px;
-  }
-
-  .sobre-stats {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1.8rem;
-    margin-top: 3rem;
-  }
-
-  .stat {
-    border-left: 2px solid var(--red);
-    padding-left: 1.3rem;
-  }
-  .stat-number {
-    font-family: 'Playfair Display', serif;
-    font-size: 2.2rem;
-    font-weight: 900;
-    color: var(--cream);
-    line-height: 1;
-  }
-  .stat-label {
-    font-size: 0.7rem;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: rgba(246,232,160,0.45);
-    margin-top: 0.3rem;
-  }
-
-  .sobre-image-wrap { position: relative; }
-
-  .sobre-image-wrap img {
-    width: 100%;
-    height: 340px;
-    object-fit: cover;
-    border-radius: var(--radius);
-    display: block;
-    box-shadow: 0 24px 64px rgba(0,0,0,0.35);
-  }
-
-  .sobre-image-wrap::after {
-    content: '';
-    position: absolute;
-    inset: 18px -18px -18px 18px;
-    border: 1.5px solid var(--red);
-    border-radius: var(--radius);
-    pointer-events: none;
-  }
-
   /* ── CARDÁPIO ────────────────────────── */
-  .cardapio-section {
-    background: var(--cream-light);
-    padding: 4rem 0;
-  }
-
+  .cardapio-section { background: var(--cream-light); padding: 4rem 0; }
   .cardapio-header {
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
     margin-bottom: 2.5rem;
   }
-
-  .cardapio-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.6rem;
-  }
+  .cardapio-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.6rem; }
 
   .card-item {
     background: var(--cream);
@@ -458,10 +282,7 @@
     box-shadow: 0 4px 18px rgba(44,24,16,0.08);
     transition: transform .3s, box-shadow .3s;
   }
-  .card-item:hover {
-    transform: translateY(-7px);
-    box-shadow: 0 28px 64px rgba(44,24,16,0.18);
-  }
+  .card-item:hover { transform: translateY(-7px); box-shadow: 0 28px 64px rgba(44,24,16,0.18); }
 
   .card-emoji-wrap {
     background: var(--cream-dark);
@@ -485,80 +306,13 @@
   .card-item:hover .card-emoji-wrap::after { transform: scaleX(1); }
 
   .card-body { padding: 1.6rem 1.7rem 2rem; }
-
-  .card-tag {
-    font-size: 0.6rem;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: var(--orange);
-    font-weight: 500;
-  }
-
-  .card-name {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.4rem;
-    font-weight: 700;
-    color: var(--brown);
-    margin: 0.45rem 0 0.6rem;
-  }
-
-  .card-desc {
-    font-size: 0.86rem;
-    color: var(--text-muted);
-    line-height: 1.68;
-    margin-bottom: 1.3rem;
-  }
-
-  .card-footer {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  .card-price {
-    font-family: 'Poppins', sans-serif;
-    font-size: 1rem;
-    font-weight: 600;
-    color: var(--red);
-  }
-
-  /* ── BANDA ───────────────────────────── */
-  .banda-section {
-    background: var(--red);
-    padding: 1.5rem 0;
-  }
-  .banda-inner {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 3rem;
-    flex-wrap: wrap;
-  }
-  .banda-item {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-  }
-  .banda-item span:first-child { font-size: 1.8rem; }
-  .banda-item p {
-    font-family: 'Playfair Display', serif;
-    font-size: 1rem;
-    font-weight: 700;
-    letter-spacing: 0.04em;
-    color: #fff;
-  }
-  .banda-sep {
-    width: 1px;
-    height: 40px;
-    background: rgba(255,255,255,0.2);
-  }
+  .card-tag { font-size: 0.6rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--orange); font-weight: 500; }
+  .card-name { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 700; color: var(--brown); margin: 0.45rem 0 0.6rem; }
+  .card-footer { display: flex; align-items: center; justify-content: space-between; }
+  .card-price { font-family: 'Poppins', sans-serif; font-size: 1rem; font-weight: 600; color: var(--red); }
 
   /* ── GALERIA ─────────────────────────── */
-  .galeria-section {
-    background: var(--cream);
-    padding: 4rem 0;
-  }
-
+  .galeria-section { background: var(--cream); padding: 4rem 0; }
   .galeria-grid {
     display: grid;
     grid-template-columns: 2.2fr 1fr 1fr;
@@ -566,38 +320,14 @@
     gap: 14px;
     margin-top: 2rem;
   }
-
-  .galeria-item {
-    border-radius: var(--radius);
-    overflow: hidden;
-    position: relative;
-    background: var(--cream-dark);
-  }
+  .galeria-item { border-radius: var(--radius); overflow: hidden; position: relative; background: var(--cream-dark); }
   .galeria-item.tall { grid-row: span 2; }
-
-  .galeria-item img {
-    width: 100%; height: 100%;
-    object-fit: cover;
-    display: block;
-    transition: transform .55s cubic-bezier(.22,1,.36,1);
-  }
+  .galeria-item img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .55s cubic-bezier(.22,1,.36,1); }
   .galeria-item:hover img { transform: scale(1.06); }
 
-  .galeria-placeholder {
-    width: 100%; height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 0.6rem;
-  }
-  .galeria-placeholder span:first-child { font-size: 2.8rem; }
-  .galeria-placeholder span:last-child {
-    font-size: 0.68rem;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--text-muted);
-  }
+  .galeria-placeholder { width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.6rem; }
+  .galeria-placeholder span:first-child { font-size: 4rem; }
+  .galeria-placeholder span:last-child { font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-muted); }
 
   .galeria-caption {
     position: absolute;
@@ -613,47 +343,17 @@
   }
   .galeria-item:hover .galeria-caption { opacity: 1; }
 
-  .galeria-note {
-    margin-top: 1.6rem;
-    font-size: 0.8rem;
-    color: var(--text-muted);
-    font-style: italic;
-    background: rgba(192,54,42,0.06);
-    border-left: 3px solid rgba(192,54,42,0.3);
-    padding: 0.8rem 1.2rem;
-    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
-    display: inline-block;
-  }
-
   /* ── CONTATO ─────────────────────────── */
-  .contato-section {
-    background: var(--brown);
-    padding: 4rem 0;
-  }
-  .contato-section .container {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 6rem;
-    align-items: start;
-  }
-
+  .contato-section { background: var(--brown); padding: 4rem 0; }
+  .contato-section .container { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: start; }
   .contato-section .section-label { color: var(--cream-dark); opacity: 0.6; }
   .contato-section .section-title { color: var(--cream-light); }
   .contato-section .section-title em { color: var(--red-light); }
 
-  .contato-desc {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.2rem;
-    font-weight: 300;
-    line-height: 1.82;
-    color: rgba(246,232,160,0.68);
-    margin-top: 1.5rem;
-    margin-bottom: 2.8rem;
-  }
+  .contato-desc { font-size: 0.95rem; font-weight: 300; line-height: 1.75; color: rgba(246,232,160,0.68); margin-top: 1.5rem; margin-bottom: 2.8rem; }
 
   .info-list { list-style: none; display: flex; flex-direction: column; gap: 1.4rem; }
   .info-item { display: flex; gap: 1.1rem; align-items: flex-start; }
-
   .info-icon {
     width: 40px; height: 40px;
     border-radius: var(--radius-sm);
@@ -664,26 +364,9 @@
     flex-shrink: 0;
     margin-top: 2px;
   }
-
-  .info-text strong {
-    display: block;
-    font-size: 0.66rem;
-    font-weight: 500;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--red-light);
-    margin-bottom: 0.3rem;
-  }
-  .info-text span {
-    font-size: 0.93rem;
-    color: rgba(246,232,160,0.68);
-    line-height: 1.65;
-  }
-  .info-text a {
-    color: rgba(246,232,160,0.68);
-    text-decoration: none;
-    transition: color .2s;
-  }
+  .info-text strong { display: block; font-size: 0.66rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--red-light); margin-bottom: 0.3rem; }
+  .info-text span { font-size: 0.93rem; color: rgba(246,232,160,0.68); line-height: 1.65; }
+  .info-text a { color: rgba(246,232,160,0.68); text-decoration: none; transition: color .2s; }
   .info-text a:hover { color: var(--cream); }
 
   .mapa-placeholder {
@@ -691,22 +374,18 @@
     border: 1px solid rgba(192,54,42,0.22);
     border-radius: var(--radius);
     height: 280px;
+    overflow: hidden;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 1rem;
   }
-  .mapa-placeholder .map-icon { font-size: 10rem; opacity: 0.35; }
-  .mapa-placeholder p {
-    font-size: 0.75rem;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: rgba(246,232,160,0.28);
-  }
+  .mapa-placeholder .map-icon { font-size: 5rem; opacity: 0.35; }
+  .mapa-placeholder p { font-size: 0.75rem; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(246,232,160,0.28); }
   .mapa-btn {
-    margin-top: 0.5rem;
-    display: inline-block;
+    margin: 0.5rem auto 0;
+    display: block;
     background: var(--red);
     color: #fff;
     text-decoration: none;
@@ -720,154 +399,9 @@
   }
   .mapa-btn:hover { background: var(--red-dark); transform: translateY(-2px); }
 
-  /* ── FOOTER ──────────────────────────── */
-  footer {
-    background: #160C06;
-    padding: 4rem;
-    text-align: center;
-    border-top: 1px solid rgba(192,54,42,0.18);
-  }
-
-  .footer-brand {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 1.8rem;
-  }
-
-  .footer-tagline {
-    font-size: 0.62rem;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    color: rgba(246,232,160,0.28);
-    margin-bottom: 2.5rem;
-  }
-
-  .footer-links {
-    display: flex;
-    justify-content: center;
-    gap: 2.5rem;
-    list-style: none;
-    margin-bottom: 2rem;
-  }
-  .footer-links a {
-    font-size: 0.7rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: rgba(246,232,160,0.3);
-    text-decoration: none;
-    transition: color .2s;
-  }
-  .footer-links a:hover { color: rgba(246,232,160,0.65); }
-
-  .footer-bottom {
-    font-size: 0.73rem;
-    color: rgba(246,232,160,0.18);
-    border-top: 1px solid rgba(255,255,255,0.04);
-    padding-top: 1.5rem;
-  }
-
-  /* ── EVENTOS ─────────────────────────── */
-  .eventos-section {
-    background: var(--brown);
-    padding: 8rem 0;
-  }
-  .eventos-section .section-label { color: var(--cream-dark); opacity: 0.6; }
-  .eventos-section .section-title { color: var(--cream-light); }
-  .eventos-section .section-title em { color: var(--red-light); }
-
-  .eventos-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.6rem;
-    margin-top: 4rem;
-  }
-
-  .evento-card {
-    border: 1px solid rgba(192,54,42,0.25);
-    border-radius: var(--radius);
-    padding: 2.2rem 2rem;
-    background: rgba(255,255,255,0.03);
-    box-shadow: 0 4px 24px rgba(0,0,0,0.18);
-    transition: transform .3s, box-shadow .3s, background .3s;
-    position: relative;
-    overflow: hidden;
-  }
-  .evento-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 3px;
-    background: var(--red);
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform .35s;
-  }
-  .evento-card:hover::before { transform: scaleX(1); }
-  .evento-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 24px 56px rgba(0,0,0,0.3);
-    background: rgba(255,255,255,0.06);
-  }
-
-  .evento-dia {
-    display: inline-block;
-    font-size: 0.6rem;
-    font-weight: 500;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: var(--red-light);
-    background: rgba(192,54,42,0.15);
-    border: 1px solid rgba(192,54,42,0.3);
-    border-radius: var(--radius-sm);
-    padding: 0.3rem 0.8rem;
-    margin-bottom: 1.4rem;
-  }
-
-  .evento-icon {
-    font-size: 2.4rem;
-    display: block;
-    margin-bottom: 1rem;
-  }
-
-  .evento-nome {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: var(--cream);
-    margin-bottom: 0.7rem;
-    line-height: 1.15;
-  }
-
-  .evento-desc {
-    font-size: 0.87rem;
-    color: rgba(246,232,160,0.55);
-    line-height: 1.7;
-  }
-
-  .evento-horario {
-    margin-top: 1.4rem;
-    font-size: 0.68rem;
-    font-weight: 500;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: rgba(246,232,160,0.35);
-    display: flex;
-    align-items: center;
-    gap: 0.4rem;
-  }
-
   /* ── DEPOIMENTOS ─────────────────────── */
-  .depoimentos-section {
-    background: var(--cream-light);
-    padding: 4rem 0;
-  }
-
-  .depoimentos-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.6rem;
-    margin-top: 2rem;
-  }
+  .depoimentos-section { background: var(--cream-light); padding: 4rem 0; }
+  .depoimentos-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.6rem; margin-top: 2rem; }
 
   .depo-card {
     background: var(--cream);
@@ -880,68 +414,18 @@
     flex-direction: column;
     gap: 1.2rem;
   }
-  .depo-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 20px 50px rgba(44,24,16,0.13);
-  }
-
-  .depo-stars {
-    display: flex;
-    gap: 0.2rem;
-    font-size: 0.95rem;
-  }
-
-  .depo-texto {
-    font-family: 'Poppins', sans-serif;
-    font-size: 0.95rem;
-    font-weight: 400;
-    font-style: normal;
-    color: var(--brown);
-    line-height: 1.75;
-    flex: 1;
-  }
+  .depo-card:hover { transform: translateY(-5px); box-shadow: 0 20px 50px rgba(44,24,16,0.13); }
+  .depo-stars { display: flex; gap: 0.2rem; font-size: 0.95rem; }
+  .depo-texto { font-size: 0.95rem; color: var(--brown); line-height: 1.75; flex: 1; }
   .depo-texto::before { content: '"'; color: var(--red); font-size: 1.4rem; line-height: 0; vertical-align: -0.3em; margin-right: 0.1em; }
   .depo-texto::after  { content: '"'; color: var(--red); font-size: 1.4rem; line-height: 0; vertical-align: -0.3em; margin-left: 0.1em; }
-
-  .depo-autor {
-    display: flex;
-    align-items: center;
-    gap: 0.8rem;
-    padding-top: 1rem;
-    border-top: 1px solid rgba(192,54,42,0.12);
-  }
-
-  .depo-avatar {
-    width: 38px;
-    height: 38px;
-    border-radius: 50%;
-    background: var(--cream-dark);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.1rem;
-    flex-shrink: 0;
-  }
-
-  .depo-nome {
-    font-size: 0.82rem;
-    font-weight: 500;
-    color: var(--brown);
-  }
-  .depo-local {
-    font-size: 0.7rem;
-    color: var(--text-muted);
-    letter-spacing: 0.06em;
-  }
+  .depo-autor { display: flex; align-items: center; gap: 0.8rem; padding-top: 1rem; border-top: 1px solid rgba(192,54,42,0.12); }
+  .depo-avatar { width: 38px; height: 38px; border-radius: 50%; background: var(--cream-dark); display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0; }
+  .depo-nome { font-size: 0.82rem; font-weight: 500; color: var(--brown); }
+  .depo-local { font-size: 0.7rem; color: var(--text-muted); letter-spacing: 0.06em; }
 
   /* ── CTA FINAL ───────────────────────── */
-  .cta-section {
-    background: var(--red);
-    padding: 7rem 0;
-    position: relative;
-    overflow: hidden;
-  }
-
+  .cta-section { background: var(--red); padding: 7rem 0; position: relative; overflow: hidden; }
   .cta-section::before {
     content: '';
     position: absolute;
@@ -950,61 +434,19 @@
     background-size: 26px 26px;
     pointer-events: none;
   }
-
   .cta-section::after {
     content: '';
     position: absolute;
     inset: 0;
-    background: radial-gradient(ellipse at center,
-      transparent 40%,
-      rgba(100,10,10,0.35) 100%
-    );
+    background: radial-gradient(ellipse at center, transparent 40%, rgba(100,10,10,0.35) 100%);
     pointer-events: none;
   }
-
-  .cta-inner {
-    position: relative;
-    z-index: 2;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1.6rem;
-  }
-
-  .cta-label {
-    font-size: 0.62rem;
-    font-weight: 500;
-    letter-spacing: 0.32em;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.6);
-  }
-
-  .cta-title {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(2.8rem, 6vw, 5.5rem);
-    font-weight: 900;
-    color: #fff;
-    line-height: 1.0;
-    letter-spacing: -0.03em;
-  }
-  .cta-title em {
-    font-style: italic;
-    color: var(--cream);
-  }
-
-  .cta-sub {
-    font-size: 1rem;
-    color: rgba(255,255,255,0.65);
-    letter-spacing: 0.06em;
-    max-width: 480px;
-  }
-
-  .cta-buttons {
-    display: flex;
-    gap: 1.2rem;
-    margin-top: 0.5rem;
-  }
+  .cta-inner { position: relative; z-index: 2; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 1.6rem; }
+  .cta-label { font-size: 0.62rem; font-weight: 500; letter-spacing: 0.32em; text-transform: uppercase; color: rgba(255,255,255,0.6); }
+  .cta-title { font-family: 'Playfair Display', serif; font-size: clamp(2.8rem, 6vw, 5.5rem); font-weight: 900; color: #fff; line-height: 1; letter-spacing: -0.03em; }
+  .cta-title em { font-style: italic; color: var(--cream); }
+  .cta-sub { font-size: 1rem; color: rgba(255,255,255,0.65); letter-spacing: 0.06em; max-width: 480px; }
+  .cta-buttons { display: flex; gap: 1.2rem; margin-top: 0.5rem; }
 
   .btn-cta-white {
     background: #fff;
@@ -1035,66 +477,162 @@
   }
   .btn-cta-outline:hover { border-color: #fff; background: rgba(255,255,255,0.1); }
 
-  /* ── REVEAL ──────────────────────────── */
-  .reveal {
+  /* ── FOOTER ──────────────────────────── */
+  footer { background: #160C06; padding: 4rem; text-align: center; border-top: 1px solid rgba(192,54,42,0.18); }
+  .footer-brand { display: flex; justify-content: center; margin-bottom: 1.8rem; }
+  .footer-tagline { font-size: 0.62rem; letter-spacing: 0.3em; text-transform: uppercase; color: rgba(246,232,160,0.28); margin-bottom: 2.5rem; }
+  .footer-bottom { font-size: 0.73rem; color: rgba(246,232,160,0.18); border-top: 1px solid rgba(255,255,255,0.04); padding-top: 1.5rem; }
+
+  /* ── MODAL ───────────────────────────── */
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(44, 24, 16, 0.6);
+    backdrop-filter: blur(4px);
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     opacity: 0;
-    transform: translateY(30px);
-    transition: opacity .7s cubic-bezier(.22,1,.36,1), transform .7s cubic-bezier(.22,1,.36,1);
+    pointer-events: none;
+    transition: opacity .3s;
   }
+  .modal-overlay.show { opacity: 1; pointer-events: all; }
+  .modal-box {
+    background: var(--cream-light);
+    border-radius: var(--radius-lg);
+    padding: 2.5rem 2.8rem;
+    text-align: center;
+    max-width: 360px;
+    width: 90%;
+    box-shadow: 0 24px 64px rgba(44,24,16,0.3);
+    transform: translateY(20px);
+    transition: transform .3s;
+  }
+  .modal-overlay.show .modal-box { transform: translateY(0); }
+  .modal-icon { font-size: 2.8rem; margin-bottom: 1rem; }
+  .modal-title { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 700; color: var(--brown); margin-bottom: 0.6rem; }
+  .modal-text { font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 1.8rem; }
+  .modal-close {
+    background: var(--red);
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding: 0.85rem 2.2rem;
+    border-radius: var(--radius-sm);
+    transition: background .2s;
+  }
+  .modal-close:hover { background: var(--red-dark); }
+
+  /* ── REVEAL ──────────────────────────── */
+  .reveal { opacity: 0; transform: translateY(30px); transition: opacity .7s cubic-bezier(.22,1,.36,1), transform .7s cubic-bezier(.22,1,.36,1); }
   .reveal.visible { opacity: 1; transform: translateY(0); }
   .reveal-delay-1 { transition-delay: .12s; }
   .reveal-delay-2 { transition-delay: .22s; }
   .reveal-delay-3 { transition-delay: .34s; }
 
-  /* ── RESPONSIVE ──────────────────────── */
+  /* ── RESPONSIVE — TABLET ─────────────── */
   @media (max-width: 1024px) {
     nav { padding: 0.85rem 2.5rem; }
     .container { padding: 0 2.5rem; }
-    .sobre-section .container,
-    .contato-section .container { gap: 4rem; }
+    .contato-section .container { gap: 3rem; }
+    .mapa-placeholder { height: 220px; }
+    .section-title { font-size: clamp(1.8rem, 3.5vw, 4rem); }
   }
 
   @media (max-width: 860px) {
-    .sobre-section .container,
-    .contato-section .container { grid-template-columns: 1fr; gap: 3rem; }
+    .contato-section .container { grid-template-columns: 1fr; gap: 2rem; }
     .cardapio-grid { grid-template-columns: 1fr 1fr; }
     .galeria-grid { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
     .galeria-item.tall { grid-row: span 1; }
-    .nav-cta { display: none; }
     .cardapio-header { flex-direction: column; align-items: flex-start; gap: 1.2rem; }
+    .mapa-placeholder { height: 200px; width: 100%; }
+    .depoimentos-grid { grid-template-columns: 1fr 1fr; }
   }
 
+  /* ── RESPONSIVE — MOBILE ─────────────── */
   @media (max-width: 600px) {
-    nav { padding: 0.85rem 1.4rem; }
-    .nav-links { display: none; }
-    .container { padding: 0 1.4rem; }
-    .cardapio-grid { grid-template-columns: 1fr; }
-    .galeria-grid { grid-template-columns: 1fr; }
-    .banda-sep { display: none; }
+    nav { padding: 0.85rem 1rem; }
+    .nav-links { gap: 1.2rem; }
+    .nav-links a { font-size: 0.6rem; letter-spacing: 0.08em; }
+    .container { padding: 0 1.2rem; }
+    .section-title { font-size: 1.8rem; }
+    .section-label { font-size: 0.58rem; }
+
+    .hero-botanical { display: none; }
+    .hero-title { font-size: 3.8rem; }
+    .hero-subtitle { font-size: 0.72rem; letter-spacing: 0.18em; }
+    .hero-logo-mark { width: 80px; height: 80px; margin-bottom: 1.2rem; }
+    .btn-primary, .btn-outline { font-size: 0.65rem; padding: 0.8rem 1.6rem; }
+
+    .cardapio-section { padding: 2.5rem 0; }
+    .cardapio-grid { grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .card-name { font-size: 1rem; }
+    .card-body { padding: 0.8rem 0.9rem 1.1rem; }
+    .card-price { font-size: 0.88rem; }
+    .card-emoji-wrap { font-size: 2.4rem; }
+
+    .galeria-section { padding: 2.5rem 0; }
+    .galeria-grid { grid-template-columns: 1fr 1fr; grid-template-rows: auto; gap: 10px; }
+    .galeria-item { height: 130px; }
+    .galeria-item.tall { grid-column: span 2; height: 160px; }
+    .galeria-grid .galeria-item:nth-child(2),
+    .galeria-grid .galeria-item:nth-child(3) { display: none; }
+    .galeria-placeholder span:first-child { font-size: 3rem; }
+    .galeria-placeholder span:last-child { font-size: 0.6rem; }
+
+    .depoimentos-section { padding: 2.5rem 0; }
+    .depoimentos-grid { grid-template-columns: 1fr; gap: 1rem; }
+    .depo-card { padding: 1.4rem 1.2rem; }
+    .depo-texto { font-size: 0.88rem; }
+
+    .contato-section { padding: 2.5rem 0; }
+
+    .cta-section { padding: 3.5rem 0; }
+    .cta-title { font-size: 2.2rem; }
+    .cta-buttons { flex-direction: column; gap: 0.8rem; width: 100%; }
+    .btn-cta-white, .btn-cta-outline { text-align: center; }
+
+    footer { padding: 2.5rem 1.4rem; }
   }
+
 </style>
 </head>
 <body>
 
-<!-- ───── NAV ───── -->
+<a href="https://wa.me/556300000000" class="whatsapp-float" target="_blank" title="WhatsApp">
+  <img src="wats.png" alt="WhatsApp" style="width:30px;height:30px;object-fit:contain;">
+</a>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modal" onclick="closeModal(event)">
+  <div class="modal-box">
+    <div class="modal-icon">🚧</div>
+    <div class="modal-title">Em breve!</div>
+    <p class="modal-text">Essa tela ainda não existe.<br>Estamos trabalhando nisso.</p>
+    <button class="modal-close" onclick="document.getElementById('modal').classList.remove('show')">Entendido</button>
+  </div>
+</div>
+
+<!-- NAV -->
 <nav id="nav">
   <a href="#inicio" class="nav-brand" data-logo="sm dark"></a>
-
   <div class="nav-right">
     <ul class="nav-links">
-      <li><a href="#sobre">Sobre</a></li>
       <li><a href="#cardapio">Cardápio</a></li>
-      <li><a href="#eventos">Eventos</a></li>
       <li><a href="#galeria">Galeria</a></li>
       <li><a href="#contato">Contato</a></li>
     </ul>
-    <a href="https://wa.me/556300000000" class="nav-cta" target="_blank">Fale conosco</a>
   </div>
 </nav>
 
-<!-- ───── HERO ───── -->
+<!-- HERO -->
 <section class="hero" id="inicio">
-
   <svg class="hero-botanical left" viewBox="0 0 400 500" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path d="M200 480 C180 380 80 320 60 200 C40 80 120 20 200 60 C280 100 340 80 360 160 C380 240 320 340 280 400 C240 460 220 470 200 480Z" stroke="#C0362A" stroke-width="1.5" fill="rgba(192,54,42,0.07)"/>
     <path d="M200 60 C160 120 100 160 80 240 C60 320 100 380 160 420" stroke="#C0362A" stroke-width="1" fill="none"/>
@@ -1104,7 +642,6 @@
     <circle cx="200" cy="60" r="12" stroke="#C0362A" stroke-width="1.5" fill="rgba(192,54,42,0.1)"/>
     <circle cx="200" cy="480" r="8" stroke="#C0362A" stroke-width="1" fill="rgba(192,54,42,0.08)"/>
   </svg>
-
   <svg class="hero-botanical right" viewBox="0 0 400 500" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path d="M200 480 C180 380 80 320 60 200 C40 80 120 20 200 60 C280 100 340 80 360 160 C380 240 320 340 280 400 C240 460 220 470 200 480Z" stroke="#C0362A" stroke-width="1.5" fill="rgba(192,54,42,0.07)"/>
     <path d="M200 60 C160 120 100 160 80 240 C60 320 100 380 160 420" stroke="#C0362A" stroke-width="1" fill="none"/>
@@ -1116,13 +653,10 @@
 
   <div class="hero-content">
     <img src="logo.png" alt="Bem-te-vi" class="hero-logo-mark">
-    <h1 class="hero-title">
-      Bem<span class="dash">-</span><span class="italic">te</span><span class="dash">-</span>vi
-    </h1>
+    <h1 class="hero-title">Bem<span class="dash">-</span><span class="italic">te</span><span class="dash">-</span>vi</h1>
     <p class="hero-subtitle">Bar &amp; Lanches</p>
     <div class="hero-cta">
       <a href="#cardapio" class="btn-primary">Ver Cardápio</a>
-      <a href="#sobre" class="btn-outline">Nossa História</a>
     </div>
   </div>
 
@@ -1134,216 +668,113 @@
   </div>
 </section>
 
-<!-- ───── SOBRE + BANDA ───── -->
-<div class="sobre-banda-wrap">
-<div class="sobre-section" id="sobre">
-  <div class="container">
-    <div class="reveal">
-      <h2 class="section-title">Um lugar para <em>relaxar</em></h2>
-      <div class="sobre-stats">
-        <div class="stat">
-          <div class="stat-number">5+</div>
-          <div class="stat-label">Anos de história</div>
-        </div>
-        <div class="stat">
-          <div class="stat-number">100%</div>
-          <div class="stat-label">Artesanal</div>
-        </div>
-        <div class="stat">
-          <div class="stat-number">∞</div>
-          <div class="stat-label">Boa conversa</div>
-        </div>
-        <div class="stat">
-          <div class="stat-number">01</div>
-          <div class="stat-label">Lugar especial</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="sobre-image-wrap reveal reveal-delay-2">
-      <img src="foto.png" alt="Curiango Brew e pastéis no Bem-te-vi">
-    </div>
-  </div>
-</div>
-
-<!-- ───── BANDA ───── -->
-<div class="banda-section">
-  <div class="banda-inner">
-    <div class="banda-item">
-      <span>🍺</span>
-      <p>Cerveja artesanal própria</p>
-    </div>
-    <div class="banda-sep"></div>
-    <div class="banda-item">
-      <span>🥐</span>
-      <p>Pastéis frescos na hora</p>
-    </div>
-    <div class="banda-sep"></div>
-    <div class="banda-item">
-      <span>📍</span>
-      <p>Palmas – TO</p>
-    </div>
-  </div>
-</div>
-
-</div><!-- /sobre-banda-wrap -->
-
-<!-- ───── CARDÁPIO ───── -->
+<!-- CARDÁPIO -->
 <div class="cardapio-section" id="cardapio">
   <div class="container">
     <div class="cardapio-header">
       <div class="reveal">
         <h2 class="section-title">Cardápio em <em>destaque</em></h2>
       </div>
-      <a href="#contato" class="btn-outline reveal reveal-delay-2" style="white-space:nowrap">Ver cardápio completo</a>
+      <a href="#" onclick="document.getElementById('modal').classList.add('show'); return false;" class="btn-outline reveal reveal-delay-2" style="white-space:nowrap">Ver cardápio completo</a>
     </div>
-
     <div class="cardapio-grid">
-      <div class="card-item reveal reveal-delay-1">
+      <div class="card-item reveal">
         <span class="card-emoji-wrap">🍺</span>
         <div class="card-body">
           <span class="card-tag">Cerveja artesanal</span>
           <div class="card-name">Curiango Brew</div>
-          <div class="card-footer">
-            <span class="card-price">R$ 18,00</span>
-          </div>
+          <div class="card-footer"><span class="card-price">R$ 18,00</span></div>
         </div>
       </div>
-
-      <div class="card-item reveal reveal-delay-2">
+      <div class="card-item reveal">
         <span class="card-emoji-wrap">🥐</span>
         <div class="card-body">
           <span class="card-tag">Lanches</span>
           <div class="card-name">Pastel Artesanal</div>
-          <div class="card-footer">
-            <span class="card-price">R$ 12,00</span>
-          </div>
+          <div class="card-footer"><span class="card-price">R$ 12,00</span></div>
         </div>
       </div>
-
-      <div class="card-item reveal reveal-delay-3">
+      <div class="card-item reveal">
         <span class="card-emoji-wrap">🍹</span>
         <div class="card-body">
           <span class="card-tag">Bebidas</span>
           <div class="card-name">Drinques da Casa</div>
-          <div class="card-footer">
-            <span class="card-price">A partir de R$ 15,00</span>
-          </div>
+          <div class="card-footer"><span class="card-price">A partir de R$ 15,00</span></div>
         </div>
       </div>
-
-      <div class="card-item reveal reveal-delay-1">
+      <div class="card-item reveal">
         <span class="card-emoji-wrap">🥪</span>
         <div class="card-body">
           <span class="card-tag">Lanches</span>
           <div class="card-name">Sanduíches Especiais</div>
-          <div class="card-footer">
-            <span class="card-price">R$ 25,00</span>
-          </div>
+          <div class="card-footer"><span class="card-price">R$ 25,00</span></div>
         </div>
       </div>
-
-      <div class="card-item reveal reveal-delay-2">
+      <div class="card-item reveal">
         <span class="card-emoji-wrap">🍗</span>
         <div class="card-body">
           <span class="card-tag">Petiscos</span>
           <div class="card-name">Porções e Petiscos</div>
-          <div class="card-footer">
-            <span class="card-price">A partir de R$ 30,00</span>
-          </div>
+          <div class="card-footer"><span class="card-price">A partir de R$ 30,00</span></div>
         </div>
       </div>
-
-      <div class="card-item reveal reveal-delay-3">
+      <div class="card-item reveal">
         <span class="card-emoji-wrap">☕</span>
         <div class="card-body">
           <span class="card-tag">Não alcoólico</span>
           <div class="card-name">Sucos & Cafés</div>
-          <div class="card-footer">
-            <span class="card-price">A partir de R$ 8,00</span>
-          </div>
+          <div class="card-footer"><span class="card-price">A partir de R$ 8,00</span></div>
         </div>
       </div>
     </div>
   </div>
 </div>
 
-<!-- ───── GALERIA ───── -->
+<!-- GALERIA -->
 <div class="galeria-section" id="galeria">
   <div class="container">
     <div class="reveal">
       <span class="section-label">Galeria</span>
       <h2 class="section-title">O ambiente em <em>imagens</em></h2>
     </div>
-
     <div class="galeria-grid">
       <div class="galeria-item tall reveal">
-        <div class="galeria-placeholder">
-          <span>🍺</span>
-          <span>Curiango Brew + Pastel</span>
-        </div>
+        <div class="galeria-placeholder"><span>🍺</span><span>Curiango Brew + Pastel</span></div>
         <div class="galeria-caption">Curiango Brew</div>
       </div>
-
       <div class="galeria-item reveal reveal-delay-1">
-        <div class="galeria-placeholder">
-          <span>🏠</span>
-          <span>Fachada</span>
-        </div>
+        <div class="galeria-placeholder"><span>🏠</span><span>Fachada</span></div>
         <div class="galeria-caption">A entrada do Bem-te-vi</div>
       </div>
-
       <div class="galeria-item reveal reveal-delay-2">
-        <div class="galeria-placeholder">
-          <span>🌿</span>
-          <span>Ambiente</span>
-        </div>
+        <div class="galeria-placeholder"><span>🌿</span><span>Ambiente</span></div>
         <div class="galeria-caption">Natureza ao redor</div>
       </div>
-
       <div class="galeria-item reveal reveal-delay-1">
-        <div class="galeria-placeholder">
-          <span>🍽️</span>
-          <span>Pratos</span>
-        </div>
+        <div class="galeria-placeholder"><span>🍽️</span><span>Pratos</span></div>
         <div class="galeria-caption">Lanches da casa</div>
       </div>
-
       <div class="galeria-item reveal reveal-delay-3">
-        <div class="galeria-placeholder">
-          <span>🎶</span>
-          <span>Noite no bar</span>
-        </div>
+        <div class="galeria-placeholder"><span>🎶</span><span>Noite no bar</span></div>
         <div class="galeria-caption">A noite começa aqui</div>
       </div>
     </div>
-
-    <p class="galeria-note">
-      💡 Para adicionar fotos reais: substitua cada <code>div.galeria-placeholder</code> por <code>&lt;img src="sua-foto.jpg"&gt;</code>
-    </p>
   </div>
 </div>
 
-<!-- ───── CONTATO ───── -->
+<!-- CONTATO -->
 <div class="contato-section" id="contato">
   <div class="container">
     <div>
       <div class="reveal">
         <span class="section-label">Onde estamos</span>
         <h2 class="section-title">Venha nos <em>visitar</em></h2>
-        <p class="contato-desc">
-          Rodeado pela natureza do Tocantins.
-          Uma visita e você vai querer voltar.
-        </p>
+        <p class="contato-desc">Rodeado pela natureza do Tocantins.<br>Uma visita e você vai querer voltar.</p>
       </div>
-
       <ul class="info-list reveal reveal-delay-1">
         <li class="info-item">
           <div class="info-icon">📍</div>
-          <div class="info-text">
-            <strong>Endereço</strong>
-            <span>Palmas — Tocantins<br>Adicione o endereço completo aqui</span>
-          </div>
+          <div class="info-text"><strong>Endereço</strong><span>XXXXXX</span></div>
         </li>
         <li class="info-item">
           <div class="info-icon">🕐</div>
@@ -1354,85 +785,61 @@
         </li>
         <li class="info-item">
           <div class="info-icon">📱</div>
-          <div class="info-text">
-            <strong>WhatsApp</strong>
-            <span><a href="https://wa.me/556300000000" target="_blank">(63) 9XXXX-XXXX</a></span>
-          </div>
+          <div class="info-text"><strong>WhatsApp</strong><span><a href="https://wa.me/556300000000" target="_blank">(63) 9XXXX-XXXX</a></span></div>
         </li>
         <li class="info-item">
           <div class="info-icon">📸</div>
-          <div class="info-text">
-            <strong>Instagram</strong>
-            <span><a href="https://instagram.com/bemtevi_bar" target="_blank">@bemtevi_bar</a></span>
-          </div>
+          <div class="info-text"><strong>Instagram</strong><span><a href="https://instagram.com/bemtevi_bar" target="_blank">@bemtevi_bar</a></span></div>
         </li>
       </ul>
     </div>
-
     <div class="reveal reveal-delay-2">
       <div class="mapa-placeholder">
         <div class="map-icon">🗺️</div>
         <p>Mapa interativo</p>
-        <a href="https://maps.google.com/?q=Taquarucu+Palmas+Tocantins"
-           target="_blank"
-           class="mapa-btn">
-          Abrir no Google Maps
-        </a>
+        <a href="https://maps.google.com/?q=Taquarucu+Palmas+Tocantins" target="_blank" class="mapa-btn">Abrir no Google Maps</a>
       </div>
     </div>
   </div>
 </div>
 
-
-<!-- ───── DEPOIMENTOS ───── -->
+<!-- DEPOIMENTOS -->
 <div class="depoimentos-section" id="depoimentos">
   <div class="container">
     <div class="reveal">
       <span class="section-label">Quem já esteve por aqui</span>
       <h2 class="section-title">O que falam do <em>Bem-te-vi</em></h2>
     </div>
-
     <div class="depoimentos-grid">
       <div class="depo-card reveal reveal-delay-1">
         <div class="depo-stars">⭐⭐⭐⭐⭐</div>
         <p class="depo-texto">Melhor lugar para relaxar depois do trabalho. A Curiango Brew é simplesmente incrível, e o pastel faz tudo valer ainda mais.</p>
         <div class="depo-autor">
           <div class="depo-avatar">😊</div>
-          <div>
-            <div class="depo-nome">Ana Paula</div>
-            <div class="depo-local">Palmas, TO</div>
-          </div>
+          <div><div class="depo-nome">Ana Paula</div><div class="depo-local">Palmas, TO</div></div>
         </div>
       </div>
-
       <div class="depo-card reveal reveal-delay-2">
         <div class="depo-stars">⭐⭐⭐⭐⭐</div>
         <p class="depo-texto">Ambiente aconchegante, atendimento impecável e bebida sempre gelada. Um lugar que você não quer ir embora.</p>
         <div class="depo-autor">
           <div class="depo-avatar">🙂</div>
-          <div>
-            <div class="depo-nome">Carlos Eduardo</div>
-            <div class="depo-local">Palmas, TO</div>
-          </div>
+          <div><div class="depo-nome">Carlos Eduardo</div><div class="depo-local">Palmas, TO</div></div>
         </div>
       </div>
-
       <div class="depo-card reveal reveal-delay-3">
         <div class="depo-stars">⭐⭐⭐⭐⭐</div>
         <p class="depo-texto">Vim uma vez e virei cliente fiel. O happy hour não tem preço — literalmente tem, e é ótimo. Recomendo demais.</p>
         <div class="depo-autor">
           <div class="depo-avatar">😄</div>
-          <div>
-            <div class="depo-nome">Fernanda Lima</div>
-            <div class="depo-local">Palmas, TO</div>
-          </div>
+          <div><div class="depo-nome">Fernanda Lima</div><div class="depo-local">Palmas, TO</div></div>
         </div>
       </div>
     </div>
   </div>
 </div>
 
-<!-- ───── CTA FINAL ───── -->
+<!-- CTA FINAL -->
 <div class="cta-section">
   <div class="container">
     <div class="cta-inner reveal">
@@ -1440,43 +847,40 @@
       <h2 class="cta-title">A mesa está<br><em>esperando você</em></h2>
       <p class="cta-sub">Terça a domingo, das 17h em diante. Sábados a partir do meio-dia.</p>
       <div class="cta-buttons">
-        <a href="https://wa.me/556300000000" target="_blank" class="btn-cta-white">Fale pelo WhatsApp</a>
+        <a href="#" onclick="document.getElementById('modal').classList.add('show'); return false;" class="btn-cta-white">Reserve sua mesa</a>
         <a href="#contato" class="btn-cta-outline">Como chegar</a>
       </div>
     </div>
   </div>
 </div>
 
-<!-- ───── FOOTER ───── -->
+<!-- FOOTER -->
 <footer>
-  <div class="footer-brand">
-    <div data-logo="lg light"></div>
-  </div>
+  <div class="footer-brand"><div data-logo="lg light"></div></div>
   <p class="footer-tagline">Bar &amp; Lanches · Tocantins</p>
-
-  <ul class="footer-links">
-    <li><a href="#sobre">Sobre</a></li>
-    <li><a href="#cardapio">Cardápio</a></li>
-    <li><a href="#galeria">Galeria</a></li>
-    <li><a href="#contato">Contato</a></li>
-  </ul>
-
-  <div class="footer-bottom">
-    © 2025 Bem-te-vi Bar & Lanches · Tocantins
-  </div>
+  <div class="footer-bottom">© 2025 Bem-te-vi Bar & Lanches · Tocantins</div>
 </footer>
 
 <script>
-  // ── Função de logo reutilizável ──────────────────────────────────────
+  document.querySelectorAll('a[href^="#"]').forEach(link => {
+    link.addEventListener('click', e => {
+      const target = document.querySelector(link.getAttribute('href'));
+      if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth' }); }
+    });
+  });
+
+  function closeModal(e) {
+    if (e.target === document.getElementById('modal'))
+      document.getElementById('modal').classList.remove('show');
+  }
+
   function buildLogo(size, theme) {
     const el = document.createElement('div');
     el.className = 'logo-block';
     el.dataset.size  = size;
     el.dataset.theme = theme;
     el.innerHTML = `
-      <div class="logo-circle">
-        <img src="logo.png" alt="Bem-te-vi">
-      </div>
+      <div class="logo-circle"><img src="logo.png" alt="Bem-te-vi"></div>
       <div class="logo-texts">
         <div class="logo-name">Bem<span class="dash">-</span><em>te</em><span class="dash">-</span>vi</div>
         <div class="logo-sub">Bar &amp; Lanches</div>
@@ -1484,12 +888,10 @@
     return el;
   }
 
-  // Renderiza todos os marcadores data-logo na página
   document.querySelectorAll('[data-logo]').forEach(el => {
     const [size, theme] = el.dataset.logo.split(' ');
     const logo = buildLogo(size, theme);
     if (el.tagName === 'A') {
-      // preserva o link — copia conteúdo e atributos ao invés de substituir
       el.innerHTML = logo.innerHTML;
       el.dataset.size  = size;
       el.dataset.theme = theme;
@@ -1500,22 +902,16 @@
   });
 
   const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          observer.unobserve(entry.target);
-        }
-      });
-    },
+    entries => entries.forEach(entry => {
+      if (entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); }
+    }),
     { threshold: 0.12 }
   );
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
   window.addEventListener('scroll', () => {
     document.getElementById('nav').style.boxShadow = window.scrollY > 40
-      ? '0 4px 28px rgba(44,24,16,0.13)'
-      : 'none';
+      ? '0 4px 28px rgba(44,24,16,0.13)' : 'none';
   });
 </script>
 </body>
