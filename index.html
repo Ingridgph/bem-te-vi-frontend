@@ -346,7 +346,7 @@
 
   /* ── CONTATO ─────────────────────────── */
   .contato-section { background: var(--brown); padding: 4rem 0; }
-  .contato-section .container { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: start; }
+  .contato-section .container { display: block; }
   .contato-section .section-label { color: var(--cream-dark); opacity: 0.6; }
   .contato-section .section-title { color: var(--cream-light); }
   .contato-section .section-title em { color: var(--red-light); }
@@ -386,7 +386,7 @@
   .mapa-placeholder p { font-size: 0.75rem; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(246,232,160,0.28); }
   .mapa-btn {
     margin: 0.5rem auto 0;
-    display: inline-block;
+    display: block;
     width: fit-content;
     background: var(--red);
     color: #fff;
@@ -554,6 +554,7 @@
     .galeria-item.tall { grid-row: span 1; }
     .cardapio-header { flex-direction: column; align-items: flex-start; gap: 1.2rem; }
     .mapa-placeholder { height: 200px; width: 100%; }
+    .mapa-btn { width: fit-content; margin: 0.5rem auto 0; }
     .depoimentos-grid { grid-template-columns: 1fr 1fr; }
   }
 
@@ -794,13 +795,7 @@
           <div class="info-text"><strong>Instagram</strong><span><a href="https://instagram.com/bemtevi_bar" target="_blank">@bemtevi_bar</a></span></div>
         </li>
       </ul>
-    </div>
-    <div class="reveal reveal-delay-2">
-      <div class="mapa-placeholder">
-        <div class="map-icon">🗺️</div>
-        <p>Mapa interativo</p>
-        <a href="https://maps.google.com/?q=Taquarucu+Palmas+Tocantins" target="_blank" class="mapa-btn">Abrir no Google Maps</a>
-      </div>
+      <a href="https://maps.google.com/?q=Taquarucu+Palmas+Tocantins" target="_blank" class="btn-primary" style="margin-top:2rem;display:inline-block">Abrir no Google Maps</a>
     </div>
   </div>
 </div>
