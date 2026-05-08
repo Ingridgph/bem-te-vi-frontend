@@ -1,0 +1,7 @@
+{
+  "name": "bem-te-vi",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "npx serve . -p 3000"
+  }
+}

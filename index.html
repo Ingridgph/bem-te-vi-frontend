@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Bem-te-vi — Bar & Lanches</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
     --cream: #F6E8A0;
@@ -27,7 +27,7 @@
   html { scroll-behavior: smooth; }
 
   body {
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'Poppins', sans-serif;
     background: var(--cream-light);
     color: var(--text);
     overflow-x: hidden;
@@ -89,7 +89,7 @@
   }
   .logo-name .dash, .logo-name em { font-style: italic; }
   .logo-sub {
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'Poppins', sans-serif;
     font-weight: 700;
     letter-spacing: 0.2em;
     text-transform: uppercase;
@@ -249,7 +249,7 @@
   .hero-title .italic { font-style: italic; color: var(--red); }
 
   .hero-subtitle {
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'Poppins', sans-serif;
     font-size: clamp(0.85rem, 1.6vw, 1.1rem);
     font-weight: 700;
     letter-spacing: 0.28em;
@@ -343,14 +343,24 @@
   .section-title em { font-style: italic; color: var(--red); }
 
   /* ── SOBRE ──────────────────────────── */
+  .sobre-banda-wrap {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
   .sobre-section {
     background: var(--brown);
-    padding: 8rem 0;
+    padding: 3rem 0;
+    overflow: hidden;
+    flex: 1;
+    display: flex;
+    align-items: center;
   }
   .sobre-section .container {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 7rem;
+    gap: 4rem;
     align-items: center;
   }
 
@@ -388,7 +398,7 @@
   }
   .stat-number {
     font-family: 'Playfair Display', serif;
-    font-size: 3rem;
+    font-size: 2.2rem;
     font-weight: 900;
     color: var(--cream);
     line-height: 1;
@@ -405,7 +415,7 @@
 
   .sobre-image-wrap img {
     width: 100%;
-    height: 560px;
+    height: 340px;
     object-fit: cover;
     border-radius: var(--radius);
     display: block;
@@ -424,14 +434,14 @@
   /* ── CARDÁPIO ────────────────────────── */
   .cardapio-section {
     background: var(--cream-light);
-    padding: 8rem 0;
+    padding: 4rem 0;
   }
 
   .cardapio-header {
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
-    margin-bottom: 4.5rem;
+    margin-bottom: 2.5rem;
   }
 
   .cardapio-grid {
@@ -455,7 +465,7 @@
 
   .card-emoji-wrap {
     background: var(--cream-dark);
-    padding: 2.2rem 0 1.5rem;
+    padding: 1.4rem 0 1rem;
     text-align: center;
     font-size: 3.6rem;
     display: block;
@@ -506,16 +516,16 @@
   }
 
   .card-price {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.25rem;
-    font-weight: 700;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
     color: var(--red);
   }
 
   /* ── BANDA ───────────────────────────── */
   .banda-section {
     background: var(--red);
-    padding: 4rem 0;
+    padding: 1.5rem 0;
   }
   .banda-inner {
     display: flex;
@@ -546,15 +556,15 @@
   /* ── GALERIA ─────────────────────────── */
   .galeria-section {
     background: var(--cream);
-    padding: 8rem 0;
+    padding: 4rem 0;
   }
 
   .galeria-grid {
     display: grid;
     grid-template-columns: 2.2fr 1fr 1fr;
-    grid-template-rows: 280px 280px;
+    grid-template-rows: 200px 200px;
     gap: 14px;
-    margin-top: 3.5rem;
+    margin-top: 2rem;
   }
 
   .galeria-item {
@@ -618,7 +628,7 @@
   /* ── CONTATO ─────────────────────────── */
   .contato-section {
     background: var(--brown);
-    padding: 8rem 0;
+    padding: 4rem 0;
   }
   .contato-section .container {
     display: grid;
@@ -680,14 +690,14 @@
     background: rgba(246,232,160,0.04);
     border: 1px solid rgba(192,54,42,0.22);
     border-radius: var(--radius);
-    height: 400px;
+    height: 280px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 1rem;
   }
-  .mapa-placeholder .map-icon { font-size: 3.2rem; opacity: 0.35; }
+  .mapa-placeholder .map-icon { font-size: 10rem; opacity: 0.35; }
   .mapa-placeholder p {
     font-size: 0.75rem;
     letter-spacing: 0.14em;
@@ -849,14 +859,14 @@
   /* ── DEPOIMENTOS ─────────────────────── */
   .depoimentos-section {
     background: var(--cream-light);
-    padding: 8rem 0;
+    padding: 4rem 0;
   }
 
   .depoimentos-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 1.6rem;
-    margin-top: 4rem;
+    margin-top: 2rem;
   }
 
   .depo-card {
@@ -882,7 +892,7 @@
   }
 
   .depo-texto {
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'Poppins', sans-serif;
     font-size: 0.95rem;
     font-weight: 400;
     font-style: normal;
@@ -1124,7 +1134,8 @@
   </div>
 </section>
 
-<!-- ───── SOBRE ───── -->
+<!-- ───── SOBRE + BANDA ───── -->
+<div class="sobre-banda-wrap">
 <div class="sobre-section" id="sobre">
   <div class="container">
     <div class="reveal">
@@ -1175,6 +1186,8 @@
   </div>
 </div>
 
+</div><!-- /sobre-banda-wrap -->
+
 <!-- ───── CARDÁPIO ───── -->
 <div class="cardapio-section" id="cardapio">
   <div class="container">
@@ -1191,7 +1204,6 @@
         <div class="card-body">
           <span class="card-tag">Cerveja artesanal</span>
           <div class="card-name">Curiango Brew</div>
-          <p class="card-desc">Nossa cerveja artesanal. Gelada, com espuma perfeita e aquele sabor que não tem igual.</p>
           <div class="card-footer">
             <span class="card-price">R$ 18,00</span>
           </div>
@@ -1203,7 +1215,6 @@
         <div class="card-body">
           <span class="card-tag">Lanches</span>
           <div class="card-name">Pastel Artesanal</div>
-          <p class="card-desc">Massa crocante e recheio generoso. Fresco, quentinho e saindo do óleo na hora certa. Simples assim.</p>
           <div class="card-footer">
             <span class="card-price">R$ 12,00</span>
           </div>
@@ -1215,7 +1226,6 @@
         <div class="card-body">
           <span class="card-tag">Bebidas</span>
           <div class="card-name">Drinques da Casa</div>
-          <p class="card-desc">Do drink refrescante à caipirinha bem feita. Cada copo é preparado na hora com produtos selecionados.</p>
           <div class="card-footer">
             <span class="card-price">A partir de R$ 15,00</span>
           </div>
@@ -1227,7 +1237,6 @@
         <div class="card-body">
           <span class="card-tag">Lanches</span>
           <div class="card-name">Sanduíches Especiais</div>
-          <p class="card-desc">Pão de qualidade, recheios incrementados e aquele molho secreto que você vai querer saber a receita.</p>
           <div class="card-footer">
             <span class="card-price">R$ 25,00</span>
           </div>
@@ -1239,7 +1248,6 @@
         <div class="card-body">
           <span class="card-tag">Petiscos</span>
           <div class="card-name">Porções e Petiscos</div>
-          <p class="card-desc">Para beliscar e conversar. Porções generosas para dividir — ou não — enquanto a cerveja gelada vai descendo.</p>
           <div class="card-footer">
             <span class="card-price">A partir de R$ 30,00</span>
           </div>
@@ -1251,7 +1259,6 @@
         <div class="card-body">
           <span class="card-tag">Não alcoólico</span>
           <div class="card-name">Sucos & Cafés</div>
-          <p class="card-desc">Sucos naturais da fruta fresca e um café que tem aquele cheiro de fim de tarde no cerrado tocantinense.</p>
           <div class="card-footer">
             <span class="card-price">A partir de R$ 8,00</span>
           </div>
